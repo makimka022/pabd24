@@ -23,7 +23,7 @@ moscow_parser = cianparser.CianParser(location="Москва")
 def main():
     """Function docstring"""
     t = datetime.datetime.now().strftime("%Y-%m-%d_%H-%M")
-    n_rooms = 3
+    n_rooms = 1
     CSV_PATH = f'data/raw/{n_rooms}_{t}.csv'
     data = moscow_parser.get_flats(
         deal_type="sale",
