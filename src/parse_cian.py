@@ -7,7 +7,7 @@ import pandas as pd
 from dotenv import dotenv_values
 import boto3
 
-YOUR_ID = '1'
+YOUR_ID = '27'
 
 config = dotenv_values(".env")
 client = boto3.client(
@@ -23,7 +23,7 @@ moscow_parser = cianparser.CianParser(location="Москва")
 def main():
     """Function docstring"""
     t = datetime.datetime.now().strftime("%Y-%m-%d_%H-%M")
-    n_rooms = 1
+    n_rooms = 3
     CSV_PATH = f'data/raw/{n_rooms}_{t}.csv'
     data = moscow_parser.get_flats(
         deal_type="sale",
