@@ -5,10 +5,10 @@ from dotenv import dotenv_values
 import boto3
 
 BUCKET_NAME = 'pabd24'
-YOUR_ID = '27'
-CSV_PATH = ['data/raw/1_2024-05-19_18-51.csv',
-            'data/raw/2_2024-05-19_18-51.csv',
-            'data/raw/3_2024-05-19_18-51.csv']
+YOUR_ID = '26'
+CSV_PATH = ['data/raw/1_2024-05-19_19-28.csv',
+            'data/raw/2_2024-05-19_19-29.csv',
+            'data/raw/3_2024-05-19_19-29.csv']
 
 config = dotenv_values(".env")
 
