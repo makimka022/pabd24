@@ -18,7 +18,7 @@ IN_FILES = ['data/raw/1_2024-05-19_19-28.csv',
 OUT_TRAIN = 'data/proc/train.csv'
 OUT_VAL = 'data/proc/val.csv'
 
-TRAIN_SIZE = 0.9
+TRAIN_SIZE = 0.8
 
 
 def main(args):
@@ -32,6 +32,7 @@ def main(args):
     new_dataframe = main_dataframe[['url_id', 'total_meters', 'price']].set_index('url_id')
 
     new_df = new_dataframe[new_dataframe['price'] < 30_000_000]
+    new_df = new_df.sample(frac=1).reset_index(drop = True)
 
     border = int(args.split * len(new_df))
     train_df, val_df = new_df[0:border], new_df[border:-1]
