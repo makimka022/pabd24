@@ -61,7 +61,7 @@ python src/test_model.py
 
 ### 6. Запуск приложения flask 
 
-Для запуска приложения на сервер используй 
+Для запуска приложения на dev-сервер используй 
 ```sh
 python src/predict_app.py 
 ``` 
@@ -69,6 +69,18 @@ python src/predict_app.py
 ```sh
 python test/test_api.py 
 ``` 
+или 
+```sh
+python test/test_parallel.py 
+``` 
+если хотим проверить нагрузку при нескольких параллельных запросах.
+
+#### Запуск приложения на prod (gunicorn)
+```bash
+gunicorn -b 0.0.0.0 src.predict_app:app --daemon 
+```
+Адрес задеплоенного приложения http://192.144.14.8:8000/predict
+
 ### 7. Использование сервиса через веб интерфейс 
 
 Для использования сервиса используйте файл `web/index.html`.  
