@@ -11,3 +11,4 @@ PyGithub
 jupyter
 matplotlib
 gunicorn
+dvc[s3]
