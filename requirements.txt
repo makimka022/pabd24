@@ -1,8 +1,12 @@
 # external requirements
 flask
 flask-cors
+flask_httpauth
 cianparser
 scikit-learn
 pandas
 boto3
 python-dotenv
+PyGithub
+jupyter
+matplotlib
