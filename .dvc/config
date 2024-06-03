@@ -1,5 +1,5 @@
 [core]
-    remote = storage
+    remote = cloudru
 ['remote "storage"']
     url = s3://pabd24/26/dvcstore
     endpointurl = https://storage.yandexcloud.net
