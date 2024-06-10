@@ -21,7 +21,7 @@ OUT_TEST = 'data/proc/test.csv'
 TRAIN_SIZE = 0.9
 PRICE_THRESHOLD = 30_000_000
 
-
+##
 def main(args):
     main_dataframe = pd.read_csv(args.input[0], delimiter=';')
     for i in range(1, len(args.input)):
