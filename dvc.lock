@@ -6,6 +6,6 @@ stages:
   preprocess_test:
     cmd: py src\preprocess_data.py -s 0 -i data/raw/1_2024-05-19_19-28.csv data/raw/2_2024-05-19_19-29.csv
   train_model:
-    cmd: py src\train_model.py -m models/linear_regression_v01.joblib
+    cmd: py src\train_model.py -m models/lin_reg_ff_v1.joblib
   test_model:
     cmd: py src\test_model.py -m models/linear_regression_v01.joblib

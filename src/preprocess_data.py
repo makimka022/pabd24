@@ -21,7 +21,7 @@ OUT_TEST = 'data/proc/test.csv'
 TRAIN_SIZE = 0.9
 PRICE_THRESHOLD = 30_000_000
 
-##
+
 def main(args):
     main_dataframe = pd.read_csv(args.input[0], delimiter=';')
     for i in range(1, len(args.input)):
@@ -30,7 +30,17 @@ def main(args):
         main_dataframe = pd.concat([main_dataframe, df], axis=0)
 
     main_dataframe['url_id'] = main_dataframe['url'].map(lambda x: x.split('/')[-2])
-    new_dataframe = main_dataframe[['url_id', 'total_meters', 'price']].set_index('url_id')
+
+    df = main_dataframe
+    df['first_floor'] = df['floor'] == 1
+    df['last_floor'] = df['floor'] == df['floors_count']
+
+    new_dataframe = df[['url_id',
+                        'total_meters',
+                        'first_floor',
+                        'last_floor',
+                        'floors_count',
+                        'price']].set_index('url_id')
 
     new_df = new_dataframe[new_dataframe['price'] < PRICE_THRESHOLD]
 
