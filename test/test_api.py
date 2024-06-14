@@ -4,7 +4,7 @@ from dotenv import dotenv_values
 import time
 
 config = dotenv_values(".env")
-ENDPOINT = 'http://192.144.14.8:5000'
+ENDPOINT = 'http://192.144.14.8:8000'
 HEADERS = {"Authorization": f"Bearer {config['APP_TOKEN']}"}
 
 

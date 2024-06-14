@@ -10,9 +10,9 @@ import numpy as np
 from geopy.geocoders import Nominatim
 import geopy.distance
 geolocator = Nominatim(user_agent="Tester")
-from utils import predict_io_bounded, predict_cpu_bounded, predict_cpu_multithread
+from src.utils import predict_io_bounded, predict_cpu_bounded, predict_cpu_multithread
 
-MODEL_SAVE_PATH = 'models/lin_reg_ff_v1.joblib'
+MODEL_SAVE_PATH = 'models/xgb_reg_v2.joblib'
 
 app = Flask(__name__)
 CORS(app)
