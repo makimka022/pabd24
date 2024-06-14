@@ -11,6 +11,5 @@ PyGithub
 jupyter
 matplotlib
 gunicorn
-dvc[s3]
 geopy
 xgboost
