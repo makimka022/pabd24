@@ -1,9 +1,9 @@
 stages:
   preprocess_train:
-    cmd: py src\preprocess_data.py -s 1 -i data/raw/1_2024-06-10_19-21.csv data/raw/2_2024-06-10_19-21.csv data/raw/3_2024-06-10_19-22.csv
+    cmd: py src\preprocess_data.py -s 1 -i data/raw/1_2024-05-19_19-28.csv data/raw/2_2024-05-19_19-29.csv data/raw/3_2024-05-19_19-29.csv data/raw/3_2024-06-10_19-22.csv
   preprocess_test:
-    cmd: py src\preprocess_data.py -s 0 -i data/raw/1_2024-05-19_19-28.csv data/raw/2_2024-05-19_19-29.csv
+    cmd: py src\preprocess_data.py -s 0 -i data/raw/1_2024-06-10_19-21.csv data/raw/2_2024-06-10_19-21.csv
   train_model:
-    cmd: py src\train_model.py -m models/lin_reg_ff_v1.joblib
+    cmd: py src\train_model.py -m models/xgb_reg_v2.joblib
   test_model:
-    cmd: py src\test_model.py -m models/lin_reg_ff_v1.joblib
+    cmd: py src\test_model.py -m models/xgb_reg_v2.joblib

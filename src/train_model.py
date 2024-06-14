@@ -6,6 +6,7 @@ import pandas as pd
 from sklearn.linear_model import LinearRegression
 from sklearn.metrics import mean_absolute_error
 from joblib import dump
+import xgboost as xgb
 
 logger = logging.getLogger(__name__)
 logging.basicConfig(
@@ -15,8 +16,8 @@ logging.basicConfig(
     format='%(asctime)s %(message)s')
 
 TRAIN_DATA = 'data/proc/train.csv'
-VAL_DATA = 'data/proc/val.csv'
-MODEL_SAVE_PATH = 'models/linear_regression_v01.joblib'
+VAL_DATA = 'data/proc/test.csv'
+MODEL_SAVE_PATH = 'models/xgb_regression_v01.joblib'
 
 
 def main(args):
@@ -25,20 +26,19 @@ def main(args):
                         'first_floor',
                         'last_floor',
                         'floors_count',
+                        'rooms_count',
+                        'distance_center'
                         ]]
     y_train = df_train['price']
 
-    linear_model = LinearRegression()
-    linear_model.fit(x_train, y_train)
-    dump(linear_model, args.model)
+    bxgb_model = xgb.XGBRegressor()
+    bxgb_model.fit(x_train, y_train)
+    dump(bxgb_model, args.model)
     logger.info(f'Saved to {args.model}')
 
-    r2 = linear_model.score(x_train, y_train)
+    r2 = bxgb_model.score(x_train, y_train)
 
-    c = linear_model.coef_
-    inter = int(linear_model.intercept_)
-
-    logger.info(f'R2 = {r2:.3f}  Coffs = {c} intercept = {inter}')
+    logger.info(f'R2 = {r2:.3f}')
 
 
 if __name__ == '__main__':

@@ -3,8 +3,9 @@ import logging
 import pandas as pd
 from joblib import load
 from sklearn.metrics import mean_absolute_error
+import xgboost as xgb
 
-MODEL_SAVE_PATH = 'models/linear_regression_v01.joblib'
+MODEL_SAVE_PATH = 'models/xgb_reg_v2.joblib'
 TEST_DATA = 'data/proc/test.csv'
 
 logger = logging.getLogger(__name__)
@@ -21,7 +22,9 @@ def main(args):
                       'first_floor',
                       'last_floor',
                       'floors_count',
-                      ]]
+                      'rooms_count',
+                      'distance_center'
+                        ]]
     y_test = df_test['price']
     model = load(args.model)
     y_pred = model.predict(x_test)

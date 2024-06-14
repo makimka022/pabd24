@@ -6,6 +6,10 @@ from flask_cors import CORS
 from joblib import load
 from flask_httpauth import HTTPTokenAuth
 from flask import send_from_directory
+import numpy as np
+from geopy.geocoders import Nominatim
+import geopy.distance
+geolocator = Nominatim(user_agent="Tester")
 from utils import predict_io_bounded, predict_cpu_bounded, predict_cpu_multithread
 
 MODEL_SAVE_PATH = 'models/lin_reg_ff_v1.joblib'
@@ -28,6 +32,15 @@ def verify_token(token):
     if token in tokens:
         return tokens[token]
 
+def calculate_distance(loc1, loc2):
+    location1 = geolocator.geocode(loc1)
+    location2 = geolocator.geocode(loc2)
+    try:    
+       coords_1 = (location1.latitude, location1.longitude)
+       coords_2 = (location2.latitude, location2.longitude)
+       return geopy.distance.geodesic(coords_1, coords_2).km
+    except:
+        np.nan
 
 def predict(in_data: dict) -> int:
     """ Predict house price from input data parameters.
@@ -41,12 +54,16 @@ def predict(in_data: dict) -> int:
     floors_count = int(in_data['floors_count'])
     is_first = (floor == 1)
     is_last = (floor == floors_count)
+    rooms_count = int(in_data['rooms_count'])
+    address_flat = "Москва, " + in_data['district'] + ', ' + in_data['street'] + ', ' + in_data['house_number']
+    distance_center = calculate_distance(address_flat, 'Москва, Красная Площадь, 1')
     price = model.predict([[area,
                             is_first,
                             is_last,
-                            floors_count]])
+                            floors_count,
+                            rooms_count,
+                            distance_center]])
     return int(price)
-
 
 
 @app.route('/favicon.ico')

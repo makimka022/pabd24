@@ -2,6 +2,10 @@
 import argparse
 import logging
 import pandas as pd
+import numpy as np
+from geopy.geocoders import Nominatim
+import geopy.distance
+geolocator = Nominatim(user_agent="Tester")
 
 logger = logging.getLogger(__name__)
 logging.basicConfig(
@@ -21,6 +25,15 @@ OUT_TEST = 'data/proc/test.csv'
 TRAIN_SIZE = 0.9
 PRICE_THRESHOLD = 30_000_000
 
+def calculate_distance(loc1, loc2):
+    location1 = geolocator.geocode(loc1)
+    location2 = geolocator.geocode(loc2)
+    try:    
+       coords_1 = (location1.latitude, location1.longitude)
+       coords_2 = (location2.latitude, location2.longitude)
+       return geopy.distance.geodesic(coords_1, coords_2).km
+    except:
+        np.nan
 
 def main(args):
     main_dataframe = pd.read_csv(args.input[0], delimiter=';')
@@ -32,14 +45,22 @@ def main(args):
     main_dataframe['url_id'] = main_dataframe['url'].map(lambda x: x.split('/')[-2])
 
     df = main_dataframe
+
+    df['district'].fillna('', inplace=True)
+
     df['first_floor'] = df['floor'] == 1
     df['last_floor'] = df['floor'] == df['floors_count']
 
-    new_dataframe = df[['url_id',
+    df['address_flat'] = "Москва, " + df['district'] + ', ' + df['street'] + ', ' + df['house_number']
+    df['distance_center'] = df.apply(lambda row: calculate_distance(row['address_flat'], 'Москва, Красная Площадь, 1'), axis=1)
+
+    new_dataframe = main_dataframe[['url_id',
                         'total_meters',
                         'first_floor',
                         'last_floor',
                         'floors_count',
+                        'rooms_count',
+                        'distance_center',
                         'price']].set_index('url_id')
 
     new_df = new_dataframe[new_dataframe['price'] < PRICE_THRESHOLD]
