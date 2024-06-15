@@ -90,5 +90,5 @@ gunicorn -b 0.0.0.0 src.predict_app:app --daemon
 Для запуска приложения используйте docker:
 
 ```bash
-docker run -p 8000:8000 makimka022/pabd24:latest
+docker run makimka022/pabd24:latest
 ```
