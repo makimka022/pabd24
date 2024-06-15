@@ -10,7 +10,6 @@ import numpy as np
 from geopy.geocoders import Nominatim
 import geopy.distance
 geolocator = Nominatim(user_agent="Tester")
-from src.utils import predict_io_bounded, predict_cpu_bounded, predict_cpu_multithread
 
 MODEL_SAVE_PATH = 'models/xgb_reg_v2.joblib'
 
