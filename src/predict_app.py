@@ -11,7 +11,7 @@ from geopy.geocoders import Nominatim
 import geopy.distance
 geolocator = Nominatim(user_agent="Tester")
 
-MODEL_SAVE_PATH = 'models/xgb_reg_v2.joblib'
+MODEL_SAVE_PATH = 'models/xgb_reg_v3.joblib'
 
 app = Flask(__name__)
 CORS(app)

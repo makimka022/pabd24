@@ -6,6 +6,6 @@ stages:
   preprocess_test:
     cmd: py src\preprocess_data.py -s 0 -i data/raw/1_2024-06-10_19-21.csv data/raw/2_2024-06-10_19-21.csv
   train_model:
-    cmd: py src\train_model.py -m models/xgb_reg_v2.joblib
+    cmd: py src\train_model.py -m models/xgb_reg_v3.joblib
   test_model:
-    cmd: py src\test_model.py -m models/xgb_reg_v2.joblib
+    cmd: py src\test_model.py -m models/xgb_reg_v3.joblib

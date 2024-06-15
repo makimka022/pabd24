@@ -23,7 +23,7 @@ OUT_TRAIN = 'data/proc/train.csv'
 OUT_TEST = 'data/proc/test.csv'
 
 TRAIN_SIZE = 0.9
-PRICE_THRESHOLD = 30_000_000
+PRICE_THRESHOLD = 60_000_000
 
 def calculate_distance(loc1, loc2):
     location1 = geolocator.geocode(loc1)
